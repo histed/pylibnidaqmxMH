@@ -2556,6 +2556,16 @@ class Task(uInt32):
         CALL('GetReadTotalSampPerChanAcquired', self, ctypes.byref(d))
         return d.value
 
+    def get_write_current_position(self):
+        """
+        Indicates the position in the buffer of the next sample to generate. 
+        This value is the same for all channels in the task.
+        """
+        d = uInt32(0)
+        CALL('GetWriteCurWritePos', self, ctypes.byref(d))
+        return d.value
+        
+
     def wait_until_done(self, timeout=-1):
         """
         Waits for the measurement or generation to complete. Use this
